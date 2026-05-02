@@ -6,13 +6,23 @@ function CabinCard({ cabin }) {
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
 
   return (
-    <div className="flex border-primary-800 border">
-      <div className="flex-1 relative">
+    /* 
+       FIX 1: Change 'flex' to 'flex-col' for mobile, and 'md:flex-row' for desktop. 
+       This prevents the image and text from squeezing each other on small screens.
+    */
+    <div className="flex flex-col md:flex-row border-primary-800 border">
+      {/* 
+         FIX 2: Added a fixed aspect ratio or height for the mobile view. 
+         'aspect-square' or 'aspect-video' ensures the image isn't squished. 
+         'md:flex-1' restores the side-by-side behavior on larger screens.
+      */}
+      <div className="relative aspect-video md:aspect-auto md:flex-1">
         <Image
           src={image}
           fill
           alt={`Cabin ${name}`}
-          className="object-cover flex-1 border-r border-primary-800"
+          /* 'object-cover' is already here, which is perfect for maintaining proportions */
+          className="object-cover border-b md:border-b-0 md:border-r border-primary-800"
         />
       </div>
 
